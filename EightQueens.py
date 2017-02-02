@@ -114,7 +114,7 @@ class EightQueens:
         else:
             self.queenPositions[col] = newRow
             print(self.queenPositions)
-            print("Selected Column {}, moved from {} to {}".format(col,initialRow,newRow))
+            print("Selected Column {0}, moved from {1} to {2}".format(col,initialRow,newRow))
         
     def returnQueens(self):
         return self.queenPositions
@@ -127,15 +127,15 @@ def main():
     #start step counter and initilize board
     steps = 0
     board.initialization()
-    print("After Initialization  {}".format(board.returnQueens()))
+    print("After Initialization  :  {0} ".format(board.returnQueens()))
     
     while(not board.inFinalState()):
         board.search()
         steps += 1
         
 
-    print("Final State   {}".format(board.returnQueens()))
-    print("Number of Steps {}".format(steps))
+    print("Final State          : {0} ".format(board.returnQueens()))
+    print("Number of Steps      : {0}".format(steps))
 
 
 main()
