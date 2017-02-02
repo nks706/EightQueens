@@ -103,7 +103,18 @@ class EightQueens:
         #randomly select a column
         #determine the smallest conflict position in that column
         col = random.randint(0,7)
-        self.queenPositions[col] = self.selectLowestConflict(col)
+        initialRow = self.queenPositions[col]
+        newRow = self.selectLowestConflict(col)
+
+        #if the state didn't change
+        #then run the search again
+        #else change state and finish
+        if(newRow == initialRow):
+            self.search()
+        else:
+            self.queenPositions[col] = newRow
+            print(self.queenPositions)
+            print("Selected Column {}, moved from {} to {}".format(col,initialRow,newRow))
         
     def returnQueens(self):
         return self.queenPositions
@@ -121,6 +132,7 @@ def main():
     while(not board.inFinalState()):
         board.search()
         steps += 1
+        
 
     print("Final State   {}".format(board.returnQueens()))
     print("Number of Steps {}".format(steps))
