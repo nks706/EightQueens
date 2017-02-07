@@ -106,15 +106,21 @@ class EightQueens:
         initialRow = self.queenPositions[col]
         newRow = self.selectLowestConflict(col)
 
+        #counter to keep track steps to find a new state
+        searchCounter = 1
+
         #if the state didn't change
         #then run the search again
+        #increment searchCounter for number of repetative states
         #else change state and finish
         if(newRow == initialRow):
-            self.search()
+            searchCounter += self.search()
         else:
             self.queenPositions[col] = newRow
             print(self.queenPositions)
             print("Selected Column {0}, moved from {1} to {2}".format(col,initialRow,newRow))
+
+        return searchCounter
         
     def returnQueens(self):
         return self.queenPositions
@@ -124,19 +130,24 @@ def main():
     board = EightQueens()
     random.seed(2)
     
-    #start step counter and initilize board
-    steps = 0
+    #start step counters and initilize board
+    changeSteps = 0
+    totalSteps = 0
+    
     board.initialization()
-    print("After Initialization  :  {0} ".format(board.returnQueens()))
+    print("After Initialization  :  {0} \n".format(board.returnQueens()))
     
     while(not board.inFinalState()):
-        board.search()
-        steps += 1
+        stepsToMove = board.search()
+        print("Steps to change      : {0} \n".format(stepsToMove))
+        totalSteps  += stepsToMove  
+        changeSteps += 1
         
 
     print("Final State          : {0} ".format(board.returnQueens()))
-    print("Number of Steps      : {0}".format(steps))
+    print("Number of Changes    : {0} ".format(changeSteps))
+    print("Number of Steps      : {0} ".format(totalSteps))
 
-
+  
 main()
     
